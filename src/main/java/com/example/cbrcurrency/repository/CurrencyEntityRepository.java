@@ -2,9 +2,10 @@ package com.example.cbrcurrency.repository;
 
 import com.example.cbrcurrency.entity.CurrencyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Optional;
-
+@RepositoryRestResource
 public interface CurrencyEntityRepository extends JpaRepository<CurrencyEntity, Long> {
     Optional<CurrencyEntity> findByValuteId(String valuteId);
 

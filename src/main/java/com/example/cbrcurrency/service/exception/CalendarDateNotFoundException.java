@@ -1,4 +1,4 @@
-package com.example.cbrcurrency.service;
+package com.example.cbrcurrency.service.exception;
 
 public class CalendarDateNotFoundException extends RuntimeException {
 

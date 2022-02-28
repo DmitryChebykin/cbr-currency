@@ -26,10 +26,11 @@ class CbrExchangeApplicationTests {
     void contextLoads() {
         currencyInfoDbSaverService.saveValutaBean();
         IntStream.range(0, 100).forEach(e -> currencyInfoDbSaverService.saveRatesAtDay(LocalDate.now().minusDays(e)));
-        IntStream.range(80, 110).forEach(e -> currencyInfoDbSaverService.saveRatesAtDay(LocalDate.now().minusDays(e)));
-        BigDecimal exchange = exchangeService.exchange("Евро", "Доллар США", BigDecimal.valueOf(100.34));
-        exchange = exchangeService.exchange("Евро", "Доллар США", BigDecimal.valueOf(100.34));
-        IntStream.range(10, 100)
+        IntStream.range(99, 110).forEach(e -> currencyInfoDbSaverService.saveRatesAtDay(LocalDate.now().minusDays(e)));
+
+        BigDecimal exchange = exchangeService.exchange("Евро", "Доллар США", BigDecimal.valueOf(100));
+
+        IntStream.range(10, 200)
                 .forEach(e -> exchangeService.exchange("Евро", "Доллар США", BigDecimal.valueOf(e)));
 
         System.out.println(exchange);

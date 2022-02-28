@@ -7,6 +7,7 @@ import com.example.cbrcurrency.mapper.ItemBeanCurrencyEntityMapper;
 import com.example.cbrcurrency.mapper.ValuteBeanToRateEntityMapper;
 import com.example.cbrcurrency.repository.CalendarDateEntityRepository;
 import com.example.cbrcurrency.repository.RateEntityRepository;
+import com.example.cbrcurrency.service.exception.CalendarDateNotFoundException;
 import com.example.cbrcurrency.xml.currencyThesaurus.ValutaBean;
 import com.example.cbrcurrency.xml.quotes.ValCursBean;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +54,7 @@ public class CurrencyInfoDbSaverService {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public void saveValutaBean() {
         log.info("Trying connect to cbr to get currency reference");
         ValutaBean valutaBean = exchangeRateRetrieveService.getValutaBean();
@@ -83,7 +84,7 @@ public class CurrencyInfoDbSaverService {
     }
 
     @Cacheable(value = "storeRatesAtDay", key = "#date")
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public void saveRatesAtDay(LocalDate date) {
         ValCursBean valCursBean = exchangeRateRetrieveService.getValCursBean(date);
         List<RateEntity> rateEntities = valCursBean.getValuteBeanList().stream()

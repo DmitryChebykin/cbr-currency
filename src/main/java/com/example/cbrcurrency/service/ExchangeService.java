@@ -1,13 +1,16 @@
 package com.example.cbrcurrency.service;
 
+import com.example.cbrcurrency.aspect.Journal;
 import com.example.cbrcurrency.entity.CalendarDateEntity;
 import com.example.cbrcurrency.entity.CurrencyEntity;
-import com.example.cbrcurrency.entity.ExchangeStoreEntity;
 import com.example.cbrcurrency.entity.RateEntity;
 import com.example.cbrcurrency.repository.CalendarDateEntityRepository;
 import com.example.cbrcurrency.repository.CurrencyEntityRepository;
 import com.example.cbrcurrency.repository.ExchangeStoreEntityRepository;
 import com.example.cbrcurrency.repository.RateEntityRepository;
+import com.example.cbrcurrency.service.exception.CalendarDateNotFoundException;
+import com.example.cbrcurrency.service.exception.CurrencyNotFoundException;
+import com.example.cbrcurrency.service.exception.RateNotFoundException;
 import com.example.cbrcurrency.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,36 +35,35 @@ public class ExchangeService {
     @Transactional
     public BigDecimal exchange(CurrencyEntity source, CurrencyEntity dest, BigDecimal amount) {
         Calendar today = Util.getCalendar(LocalDate.now());
-        Optional<CalendarDateEntity> byDate = calendarDateEntityRepository.findByDate(today);
-        CalendarDateEntity calendarDateEntity = byDate.get();
-        Optional<RateEntity> optSource = rateEntityRepository.findByCurrencyEntityAndAndCalendarDateEntity(source, calendarDateEntity);
-        Optional<RateEntity> optDest = rateEntityRepository.findByCurrencyEntityAndAndCalendarDateEntity(dest, calendarDateEntity);
 
-        RateEntity sourceRate = optSource.get();
-        RateEntity destRate = optDest.get();
+        Optional<CalendarDateEntity> optionalCalendarDateEntity = calendarDateEntityRepository.findByDate(today);
+
+        CalendarDateEntity calendarDateEntity = optionalCalendarDateEntity.orElseThrow(CalendarDateNotFoundException::new);
+
+        Optional<RateEntity> optSource = rateEntityRepository.findByCurrencyEntityAndAndCalendarDateEntity(source, calendarDateEntity);
+        RateEntity sourceRate = optSource.orElseThrow(RateNotFoundException::new);
 
         BigDecimal srcBgDcml = sourceRate.getCurrencyRate();
+
+        Optional<RateEntity> optDest = rateEntityRepository.findByCurrencyEntityAndAndCalendarDateEntity(dest, calendarDateEntity);
+        RateEntity destRate = optDest.orElseThrow(RateNotFoundException::new);
+
         BigDecimal dstBgDcml = destRate.getCurrencyRate();
 
         BigDecimal divide = srcBgDcml.divide(dstBgDcml, BigDecimal.ROUND_HALF_UP);
-        BigDecimal multiply = divide.multiply(amount);
 
-        ExchangeStoreEntity exchangeStoreEntity = ExchangeStoreEntity.builder()
-                .sourceCurrency(source)
-                .destinationCurrency(dest)
-                .fromAmount(amount)
-                .conversionRate(divide)
-                .build();
-        exchangeStoreEntityRepository.save(exchangeStoreEntity);
-        return multiply;
+        return divide.multiply(amount);
     }
 
+    @Journal
     @Transactional
     public BigDecimal exchange(String source, String dest, BigDecimal amount) {
         Optional<CurrencyEntity> optSource = currencyEntityRepository.findByName(source);
+        CurrencyEntity currencySource = optSource.orElseThrow(CurrencyNotFoundException::new);
+
         Optional<CurrencyEntity> optDest = currencyEntityRepository.findByName(dest);
-        CurrencyEntity currencySource = optSource.get();
-        CurrencyEntity currencyDest = optDest.get();
+        CurrencyEntity currencyDest = optDest.orElseThrow(CurrencyNotFoundException::new);
+
         return exchange(currencySource, currencyDest, amount);
     }
 }

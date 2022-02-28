@@ -18,24 +18,26 @@ spring:
       hibernate:
         order_inserts: true
         order_update: true
-        generate_statistics: true
+        generate_statistics: false
         jdbc:
           batch_size: 60
         dialect: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
     database: postgresql
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
 
 logging:
   level:
-    org:
-      hibernate: ERROR
-      springframework:
-        cache: trace
-        web: DEBUG
-    root: WARN
+    com:
+      example:
+        cbrcurrency: info
+    springframework:
+      cache: off
+      web: off
+    root: info
+    hibernate: off
     transaction:
       interceptor: info
 
