@@ -9,6 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.Optional;
 
 @RepositoryRestResource
-public interface RateEntityRepository extends JpaRepository<RateEntity, Long> {
+public interface RateEntityRepository extends BaseJpaRepository<RateEntity, Long> {
     Optional<RateEntity> findByCurrencyEntityAndAndCalendarDateEntity(CurrencyEntity entity, CalendarDateEntity calendarDateEntity);
 }
