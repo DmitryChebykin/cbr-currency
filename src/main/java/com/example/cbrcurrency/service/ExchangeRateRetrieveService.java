@@ -1,7 +1,7 @@
 package com.example.cbrcurrency.service;
 
 import com.example.cbrcurrency.configuration.CbrConfig;
-import com.example.cbrcurrency.xml.currencyThesaurus.ValutaBean;
+import com.example.cbrcurrency.xml.currencyRegistry.ValutaBean;
 import com.example.cbrcurrency.xml.quotes.ValCursBean;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;

@@ -1,4 +1,4 @@
-package com.example.cbrcurrency.xml.currencyThesaurus;
+package com.example.cbrcurrency.xml.currencyRegistry;
 
 import lombok.*;
 

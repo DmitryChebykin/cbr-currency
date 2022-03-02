@@ -14,16 +14,16 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ExchangeStoreEntity extends BaseEntity<Long> {
     @ManyToOne
-    @JoinColumn(name = "source_id")
-    private CurrencyEntity sourceCurrency;
+    @JoinColumn(name = "sourceid")
+    private CurrencyEntity sourceId;
 
     @ManyToOne
-    @JoinColumn(name = "destination_id")
-    private CurrencyEntity destinationCurrency;
+    @JoinColumn(name = "destinationid")
+    private CurrencyEntity destinationId;
 
     @Column(name = "amount", precision = 9, scale = 4)
-    private BigDecimal fromAmount;
+    private BigDecimal amount;
 
     @Column(name = "rate", precision = 9, scale = 4)
-    private BigDecimal conversionRate;
+    private BigDecimal rate;
 }

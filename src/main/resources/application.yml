@@ -16,6 +16,9 @@ spring:
   jpa:
     properties:
       hibernate:
+        naming:
+#          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        #        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         order_inserts: true
         order_update: true
         generate_statistics: false

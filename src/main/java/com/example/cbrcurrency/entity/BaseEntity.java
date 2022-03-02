@@ -19,9 +19,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class BaseEntity<T extends Serializable> implements Serializable {
-    private static final String CREATE_TIME = "create_time";
+    private static final String CREATE_TIME = "createat";
 
-    private static final String LAST_MODIFIED_TIME = "last_modified_time";
+    private static final String LAST_MODIFIED_TIME = "modifiedat";
 
     @Id
     @Column(name = "id")
@@ -30,7 +30,7 @@ public abstract class BaseEntity<T extends Serializable> implements Serializable
 
     @CreationTimestamp()
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = CREATE_TIME, nullable = true, updatable = false, columnDefinition = "TIMESTAMP")
+    @Column(name = CREATE_TIME, updatable = false, columnDefinition = "TIMESTAMP")
     private Calendar createAt;
 
     @UpdateTimestamp

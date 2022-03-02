@@ -8,7 +8,7 @@ import com.example.cbrcurrency.mapper.ValuteBeanToRateEntityMapper;
 import com.example.cbrcurrency.repository.CalendarDateEntityRepository;
 import com.example.cbrcurrency.repository.RateEntityRepository;
 import com.example.cbrcurrency.service.exception.CalendarDateNotFoundException;
-import com.example.cbrcurrency.xml.currencyThesaurus.ValutaBean;
+import com.example.cbrcurrency.xml.currencyRegistry.ValutaBean;
 import com.example.cbrcurrency.xml.quotes.ValCursBean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
@@ -37,8 +36,8 @@ import java.util.stream.Collectors;
 import static com.example.cbrcurrency.util.Util.getCalendar;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class CurrencyInfoDbSaverService {
     private final ExchangeRateRetrieveService exchangeRateRetrieveService;
 
@@ -64,19 +63,19 @@ public class CurrencyInfoDbSaverService {
         List<CurrencyEntity> currencyEntityList = valutaBean.getItemBean().stream()
                 .map(itemBeanCurrencyEntityMapper::itemBeanToCurrencyEntity).collect(Collectors.toList());
 
-        final String sql = "INSERT INTO currency (create_time, last_modified_time" +
+        final String sql = "INSERT INTO currency (createat, modifiedat" +
                 ", eng_name, iso_char_code, iso_num_code, currency_name, nominal, parent_code, valute_id" +
                 ") " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) " +
                 "ON CONFLICT (valute_id) DO UPDATE " +
-                "SET create_time = excluded.create_time, " +
+                "SET createat = excluded.createat, " +
                 "eng_name = excluded.eng_name, " +
                 "iso_char_code = excluded.iso_char_code, " +
                 "iso_num_code = excluded.iso_num_code, " +
                 "currency_name = excluded.currency_name, " +
                 "nominal = excluded.nominal, " +
                 "parent_code = excluded.parent_code, " +
-                "last_modified_time = excluded.last_modified_time";
+                "modifiedat = excluded.modifiedat";
 
         log.info("Trying batch save CurrencyEntity list to database");
 
@@ -91,8 +90,8 @@ public class CurrencyInfoDbSaverService {
                 .map(e -> valuteBeanToRateEntityMapper.valuteBeanToRateEntity(e, date)).collect(Collectors.toList());
 
         final String sql = "WITH rows AS (" +
-                "INSERT INTO calendar_dates (create_time, last_modified_time, day) " +
-                "VALUES (:create_time, :last_modified_time, :day) ON CONFLICT (day) DO NOTHING RETURNING id) " +
+                "INSERT INTO calendar_dates (createat, modifiedat, date) " +
+                "VALUES (:create_time, :last_modified_time, :day) ON CONFLICT (date) DO NOTHING RETURNING id) " +
                 "SELECT id FROM ROWS UNION ALL " +
                 "SELECT ID FROM currency WHERE valute_id = :day LIMIT 1";
 

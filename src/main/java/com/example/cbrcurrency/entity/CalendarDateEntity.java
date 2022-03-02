@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CalendarDateEntity extends BaseEntity<Long> {
     @Temporal(TemporalType.DATE)
-    @Column(name = "day", unique = true)
+    @Column(name = "date", unique = true)
     private Calendar date;
 
     @OneToMany(mappedBy = "calendarDateEntity")

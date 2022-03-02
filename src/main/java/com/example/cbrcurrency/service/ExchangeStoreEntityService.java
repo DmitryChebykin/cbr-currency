@@ -15,4 +15,9 @@ public class ExchangeStoreEntityService {
     public void save(ExchangeStoreEntity exchangeStoreEntity) {
         exchangeStoreEntityRepository.save(exchangeStoreEntity);
     }
+
+    @Transactional
+    public void saveByQueryDsl(ExchangeStoreEntity exchangeStoreEntity) {
+        exchangeStoreEntityRepository.save(exchangeStoreEntity);
+    }
 }

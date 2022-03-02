@@ -34,10 +34,10 @@ public class ExchangeServiceHandler {
 
         BigDecimal amount = (BigDecimal) args[2];
         ExchangeStoreEntity exchangeStoreEntity = ExchangeStoreEntity.builder()
-                .sourceCurrency(currencyEntityRepository.findByName((String) args[0]).orElseThrow(CurrencyNotFoundException::new))
-                .destinationCurrency(currencyEntityRepository.findByName((String) args[0]).orElseThrow(CurrencyNotFoundException::new))
-                .fromAmount(amount)
-                .conversionRate(((BigDecimal) result).divide(amount, BigDecimal.ROUND_HALF_UP))
+                .sourceId(currencyEntityRepository.findByName((String) args[0]).orElseThrow(CurrencyNotFoundException::new))
+                .destinationId(currencyEntityRepository.findByName((String) args[1]).orElseThrow(CurrencyNotFoundException::new))
+                .amount(amount)
+                .rate(((BigDecimal) result).divide(amount, BigDecimal.ROUND_HALF_UP))
                 .build();
 
         log.info(String.format("Trying save exchangeStoreEntity : %s", exchangeStoreEntity.toString()));
