@@ -1,21 +1,24 @@
 package com.example.cbrcurrency.configuration;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.sql.Configuration;
 import com.querydsl.sql.PostgreSQLTemplates;
 import com.querydsl.sql.SQLQueryFactory;
 import com.querydsl.sql.SQLTemplates;
-import com.querydsl.sql.spring.SpringConnectionProvider;
 import com.querydsl.sql.spring.SpringExceptionTranslator;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 @org.springframework.context.annotation.Configuration
+@AllArgsConstructor
 public class QueryDslConfig {
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
+
+    private final EntityManager entityManager;
 
     @Bean
     public Configuration configuration() {
@@ -32,8 +35,11 @@ public class QueryDslConfig {
     @Bean
     public SQLQueryFactory queryFactory() {
 
-//        SpringConnectionProvider springConnectionProvider = new SpringConnectionProvider(dataSource);
-
         return new SQLQueryFactory(configuration(), dataSource);
+    }
+
+    @Bean
+    public JPAQuery<?> jpaQuery() {
+        return new JPAQuery<>(entityManager);
     }
 }
