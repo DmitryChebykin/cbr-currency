@@ -1,0 +1,16 @@
+scalar Calendar
+
+type Query {
+   getAllCurrencies: [Currency]
+}
+
+type Currency {
+    id: ID
+    engName: String
+    isoNumCode: String
+    isoCharCode: String
+    name: String
+    nominal: String
+    parentCode: String
+    valuteId: String
+}
