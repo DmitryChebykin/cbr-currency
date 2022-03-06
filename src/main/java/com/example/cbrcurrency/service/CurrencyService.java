@@ -5,7 +5,6 @@ import com.example.cbrcurrency.entity.CurrencyEntity;
 import com.example.cbrcurrency.mapper.CurrencyMapper;
 import com.example.cbrcurrency.repository.CurrencyEntityRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

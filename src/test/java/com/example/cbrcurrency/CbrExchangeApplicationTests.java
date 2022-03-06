@@ -1,13 +1,8 @@
 package com.example.cbrcurrency;
 
 import com.example.cbrcurrency.dto.CurrencyExchangeDto;
-import com.example.cbrcurrency.repository.RateEntityRepository;
-import com.example.cbrcurrency.service.CurrencyInfoDbSaverService;
-import com.example.cbrcurrency.service.ExchangeService;
 import com.example.cbrcurrency.service.PeriodStatisticDto;
 import com.example.cbrcurrency.service.QueryDslService;
-import com.graphql.spring.boot.test.GraphQLTest;
-import com.querydsl.sql.SQLQueryFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
