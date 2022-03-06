@@ -6,6 +6,7 @@ import com.example.cbrcurrency.service.CurrencyInfoDbSaverService;
 import com.example.cbrcurrency.service.ExchangeService;
 import com.example.cbrcurrency.service.PeriodStatisticDto;
 import com.example.cbrcurrency.service.QueryDslService;
+import com.graphql.spring.boot.test.GraphQLTest;
 import com.querydsl.sql.SQLQueryFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +16,26 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+
 @SpringBootTest
 class CbrExchangeApplicationTests {
-    @Autowired
-    private RateEntityRepository rateEntityRepository;
+//    @Autowired
+//    private RateEntityRepository rateEntityRepository;
 
     @Autowired
     private QueryDslService queryDslService;
 
-    @Autowired
-    private SQLQueryFactory queryFactory;
+//    @Autowired
+//    private SQLQueryFactory queryFactory;
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-    private CurrencyInfoDbSaverService currencyInfoDbSaverService;
-
-    @Autowired
-    private ExchangeService exchangeService;
+//    @Autowired
+//    private CurrencyInfoDbSaverService currencyInfoDbSaverService;
+//
+//    @Autowired
+//    private ExchangeService exchangeService;
 
     @Test
     void contextLoads() {

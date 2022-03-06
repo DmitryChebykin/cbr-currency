@@ -3,11 +3,14 @@ package com.example.cbrcurrency.util;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 
 @Slf4j
 public class Util {
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
     public static Calendar getCalendar(LocalDate localDate) {
         Date date = Date.valueOf(localDate);
         Calendar calendar = Calendar.getInstance();
