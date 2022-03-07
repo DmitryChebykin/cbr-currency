@@ -11,11 +11,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public final class QueryDslUtils {
-
     /**
      * Simple Type cache (If you want another cache strategy, make it your own.)
      */
     private static final ConcurrentMap<EntityPath<?>, RelationalPath<?>> relationalMap = new ConcurrentHashMap<>();
+
+    private QueryDslUtils() {
+    }
 
     /**
      * Entity Class to SQLQueryFactory RelationalPath
@@ -29,8 +31,9 @@ public final class QueryDslUtils {
         AnnotatedElement annotatedElement = Objects.requireNonNull(Objects.requireNonNull(entityPath, "entityPath is null").getAnnotatedElement(), "no annotation");
         Table table = Objects.requireNonNull(annotatedElement.getAnnotation(Table.class), "no entity table");
         RelationalPath<?> result = relationalMap.get(entityPath);
-        if (result == null)
+        if (result == null) {
             relationalMap.put(entityPath, result = new RelationalPathBase<T>(entityPath.getType(), entityPath.getMetadata(), table.schema(), table.name()));
+        }
         return (RelationalPath<T>) result;
     }
 }

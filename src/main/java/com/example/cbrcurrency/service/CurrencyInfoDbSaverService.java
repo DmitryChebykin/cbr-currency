@@ -8,7 +8,7 @@ import com.example.cbrcurrency.mapper.ValuteBeanToRateEntityMapper;
 import com.example.cbrcurrency.repository.CalendarDateEntityRepository;
 import com.example.cbrcurrency.repository.RateEntityRepository;
 import com.example.cbrcurrency.service.exception.CalendarDateNotFoundException;
-import com.example.cbrcurrency.xml.currencyRegistry.ValutaBean;
+import com.example.cbrcurrency.xml.currency_registry.ValutaBean;
 import com.example.cbrcurrency.xml.quotes.ValCursBean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -118,7 +117,7 @@ public class CurrencyInfoDbSaverService {
 
         optionalDay.ifPresent(e -> {
             CalendarDateEntity calendarDateEntity = calendarDateEntityRepository.findById(e).orElseThrow(() -> new CalendarDateNotFoundException("date with id %d not found in DB"));
-            rateEntities.stream().forEach(r -> r.setCalendarDateEntity(calendarDateEntity));
+            rateEntities.forEach(r -> r.setCalendarDateEntity(calendarDateEntity));
             rateEntityRepository.saveAll(rateEntities);
         });
 

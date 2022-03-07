@@ -11,5 +11,5 @@ import java.util.Optional;
 @RepositoryRestResource
 @Repository
 public interface RateEntityRepository extends BaseJpaRepository<RateEntity, Long> {
-    Optional<RateEntity> findByCurrencyEntityAndAndCalendarDateEntity(CurrencyEntity entity, CalendarDateEntity calendarDateEntity);
+    Optional<RateEntity> findByCurrencyEntityAndCalendarDateEntity(CurrencyEntity entity, CalendarDateEntity calendarDateEntity);
 }

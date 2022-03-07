@@ -1,4 +1,4 @@
-package com.example.cbrcurrency.xml.currencyRegistry;
+package com.example.cbrcurrency.xml.currency_registry;
 
 import lombok.*;
 
@@ -13,23 +13,23 @@ import javax.xml.bind.annotation.*;
 @Setter
 public class ItemBean {
     @XmlAttribute(name = "ID")
-    String itemId = "";
+    private String itemId = "";
 
     @XmlElement(name = "EngName")
-    String engName = "";
+    private String engName = "";
 
     @XmlElement(name = "Name")
-    String name = "";
+    private String name = "";
 
     @XmlElement(name = "Nominal")
-    String nominal = "";
+    private String nominal = "";
 
     @XmlElement(name = "ParentCode")
-    String parentCode = "";
+    private String parentCode = "";
 
     @XmlElement(name = "ISO_Num_Code")
-    String isoNumCode = "";
+    private String isoNumCode = "";
 
     @XmlElement(name = "ISO_Char_Code")
-    String isoCharCode = "";
+    private String isoCharCode = "";
 }

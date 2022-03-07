@@ -21,12 +21,7 @@ public class CurrencyService {
     @Transactional(readOnly = true)
     public List<CurrencyDto> getAllCurrencies() {
         List<CurrencyEntity> currencyEntities = currencyEntityRepository.findAll();
-        List<CurrencyDto> currencyDtos = currencyEntities.stream().map(e -> {
-            CurrencyDto target = CurrencyMapper.INSTANCE.toDto(e);
-            return target;
-        }).collect(Collectors.toList());
-
-        return currencyDtos;
+        return currencyEntities.stream().map(CurrencyMapper.INSTANCE::toDto).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -44,8 +39,6 @@ public class CurrencyService {
 
         return CurrencyMapper.INSTANCE.toDto(currencyEntity);
     }
-
-
 
     @Transactional(readOnly = true)
     public CurrencyDto getCurrencyByIsoCharCode(String charCode) {

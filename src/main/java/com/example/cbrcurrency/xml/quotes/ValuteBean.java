@@ -13,20 +13,20 @@ import javax.xml.bind.annotation.*;
 @ToString
 public class ValuteBean {
     @XmlElement(name = "CharCode")
-    String charCode = "";
+    private String charCode = "";
 
     @XmlAttribute(name = "ID")
-    String iD = "";
+    private String iD = "";
 
     @XmlElement(name = "Name")
-    String name = "";
+    private String name = "";
 
     @XmlElement(name = "Nominal")
-    String nominal = "";
+    private String nominal = "";
 
     @XmlElement(name = "NumCode")
-    String numCode = "";
+    private String numCode = "";
 
     @XmlElement(name = "Value")
-    String value = "";
+    private String value = "";
 }

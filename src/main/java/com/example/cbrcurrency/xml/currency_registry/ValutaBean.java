@@ -1,4 +1,4 @@
-package com.example.cbrcurrency.xml.currencyRegistry;
+package com.example.cbrcurrency.xml.currency_registry;
 
 import lombok.*;
 
@@ -17,5 +17,5 @@ import java.util.List;
 @ToString
 public class ValutaBean {
     @XmlElement(name = "Item", type = ItemBean.class)
-    List<ItemBean> itemBean;
+    private List<ItemBean> itemBean;
 }

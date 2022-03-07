@@ -1,7 +1,7 @@
 package com.example.cbrcurrency.mapper;
 
 import com.example.cbrcurrency.entity.CurrencyEntity;
-import com.example.cbrcurrency.xml.currencyRegistry.ItemBean;
+import com.example.cbrcurrency.xml.currency_registry.ItemBean;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

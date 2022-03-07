@@ -1,0 +1,39 @@
+scalar Calendar
+
+type Query {
+    getAllCurrencies: [Currency]
+    getCurrencyByEngName (engName: String!): Currency
+    getCurrencyByName (engName: String!): Currency
+    getCurrencyByValuteId (valuteId: String!): Currency
+    getCurrencyByIsoCharCode (isoCharCode: String!): Currency
+    getAverageRateAndTotalAmountForLastDays(source: ID!, dest: ID!, days: Int!): PeriodStatistic
+    getAllExchanges(fromDate: Calendar!, toDate: Calendar!): [Exchange]
+}
+
+type Exchange {
+    date: Calendar!
+    fromCharCode: String
+    toCharCode: String
+    amount: Float
+    rate: Float
+}
+
+type PeriodStatistic {
+    amount: Float!
+    averageRate: Float
+}
+
+type Currency {
+    id: ID!
+    engName: String
+    isoNumCode: String
+    isoCharCode: String
+    name: String
+    nominal: String
+    parentCode: String
+    valuteId: String
+}
+
+type Mutation {
+    getExchangeResult(source: String!, target: String!, amount: Float!): Float
+}

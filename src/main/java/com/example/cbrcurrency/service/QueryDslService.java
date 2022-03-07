@@ -3,7 +3,6 @@ package com.example.cbrcurrency.service;
 import com.example.cbrcurrency.dto.CurrencyExchangeDto;
 import com.example.cbrcurrency.dto.ExchangeGraphQlDto;
 import com.example.cbrcurrency.dto.PeriodStatisticDto;
-import com.example.cbrcurrency.entity.CurrencyEntity;
 import com.example.cbrcurrency.entity.ExchangeStoreEntity;
 import com.example.cbrcurrency.entity.QCurrencyEntity;
 import com.example.cbrcurrency.entity.QExchangeStoreEntity;
@@ -74,7 +73,7 @@ public class QueryDslService {
 
         FetchableQueryBase fetchable = (FetchableQueryBase) queryBase;
 
-        return (List<CurrencyExchangeDto>) fetchable.fetch();
+        return fetchable.fetch();
     }
 
     @Transactional(readOnly = true)
@@ -118,6 +117,6 @@ public class QueryDslService {
 
         FetchableQueryBase fetchable = (FetchableQueryBase) queryBase;
 
-        return (List<ExchangeGraphQlDto>) fetchable.fetch();
+        return fetchable.fetch();
     }
 }

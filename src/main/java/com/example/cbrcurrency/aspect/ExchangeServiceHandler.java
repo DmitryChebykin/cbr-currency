@@ -30,6 +30,7 @@ public class ExchangeServiceHandler {
 
     @Pointcut("@annotation(Journal)")
     public void journalPointcut() {
+        // TODO document why this method is empty
     }
 
     @Before("journalPointcut()")
@@ -38,7 +39,7 @@ public class ExchangeServiceHandler {
     }
 
     @AfterReturning(pointcut = "journalPointcut()", returning = "result")
-    public void docAfterReturning(JoinPoint joinPoint, Object result) throws Throwable {
+    public void docAfterReturning(JoinPoint joinPoint, Object result) {
         Object[] args = joinPoint.getArgs();
 
         BigDecimal amount = (BigDecimal) args[2];

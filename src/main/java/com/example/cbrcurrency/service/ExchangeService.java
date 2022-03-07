@@ -37,12 +37,12 @@ public class ExchangeService {
 
         CalendarDateEntity calendarDateEntity = optionalCalendarDateEntity.orElseThrow(CalendarDateNotFoundException::new);
 
-        Optional<RateEntity> optSource = rateEntityRepository.findByCurrencyEntityAndAndCalendarDateEntity(source, calendarDateEntity);
+        Optional<RateEntity> optSource = rateEntityRepository.findByCurrencyEntityAndCalendarDateEntity(source, calendarDateEntity);
         RateEntity sourceRate = optSource.orElseThrow(RateNotFoundException::new);
 
         BigDecimal srcBgDcml = sourceRate.getCurrencyRate();
 
-        Optional<RateEntity> optDest = rateEntityRepository.findByCurrencyEntityAndAndCalendarDateEntity(dest, calendarDateEntity);
+        Optional<RateEntity> optDest = rateEntityRepository.findByCurrencyEntityAndCalendarDateEntity(dest, calendarDateEntity);
         RateEntity destRate = optDest.orElseThrow(RateNotFoundException::new);
 
         BigDecimal dstBgDcml = destRate.getCurrencyRate();

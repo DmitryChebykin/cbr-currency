@@ -14,11 +14,11 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ValCursBean {
     @XmlAttribute(name = "Date")
-    String date = "";
+    private String date = "";
 
     @XmlAttribute(name = "name")
-    String name = "";
+    private String name = "";
 
     @XmlElement(name = "Valute", type = ValuteBean.class)
-    List<ValuteBean> valuteBeanList;
+    private List<ValuteBean> valuteBeanList;
 }

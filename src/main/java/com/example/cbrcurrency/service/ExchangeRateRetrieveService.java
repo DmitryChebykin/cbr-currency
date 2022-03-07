@@ -1,7 +1,7 @@
 package com.example.cbrcurrency.service;
 
 import com.example.cbrcurrency.configuration.CbrConfig;
-import com.example.cbrcurrency.xml.currencyRegistry.ValutaBean;
+import com.example.cbrcurrency.xml.currency_registry.ValutaBean;
 import com.example.cbrcurrency.xml.quotes.ValCursBean;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -26,18 +26,14 @@ public class ExchangeRateRetrieveService {
     public ValCursBean getValCursBean(LocalDate date) {
         String requestUri = String.format("%s?date_req=%s", cbrConfig.getQuotesUrl(), DATE_FORMATTER.format(date));
 
-        ValCursBean valCursBean = dataClient
+        return dataClient
                 .get().uri(requestUri)
                 .exchangeToMono(e -> e.bodyToMono(ValCursBean.class)).block();
-
-        return valCursBean;
     }
 
     public ValutaBean getValutaBean() {
-        ValutaBean valutaBean = dataClient.get()
+        return dataClient.get()
                 .uri(cbrConfig.getThesaurusUrl())
                 .exchangeToMono(e -> e.bodyToMono(ValutaBean.class)).block();
-
-        return valutaBean;
     }
 }

@@ -36,7 +36,7 @@ public class WebClientConfig {
 
     private HttpClient getHttpClient() {
         return HttpClient.create().option(ChannelOption.CONNECT_TIMEOUT_MILLIS, TIMEOUT)
-                .responseTimeout(Duration.ofMillis(5000))
+                .responseTimeout(Duration.ofMillis(TIMEOUT))
                 .followRedirect(true)
                 .doOnConnected(conn -> conn.addHandlerLast(new ReadTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS))
                         .addHandlerLast(new WriteTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS)));

@@ -7,14 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
-
 @Service
 @RequiredArgsConstructor
 public class GraphQlMutationService implements GraphQLMutationResolver {
     private final ExchangeService exchangeService;
 
-
-    public BigDecimal getExchangeResult(String sourceId, String targetId, BigDecimal amount){
+    public BigDecimal getExchangeResult(String sourceId, String targetId, BigDecimal amount) {
         return exchangeService.exchange(sourceId, targetId, amount);
     }
 }

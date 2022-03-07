@@ -16,6 +16,7 @@ public class LoggingHandler {
 
     @Pointcut("execution(public * com.example.cbrcurrency.service..*(..))")
     public void allMethod() {
+        // TODO document why this method is empty
     }
 
     @AfterReturning(pointcut = "allMethod()", returning = "result")

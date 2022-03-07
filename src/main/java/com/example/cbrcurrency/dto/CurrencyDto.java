@@ -8,19 +8,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CurrencyDto {
-    Long id;
+    private Long id;
 
-    String valuteId;
+    private String valuteId;
 
-    String engName;
+    private String engName;
 
-    String name;
+    private String name;
 
-    String nominal;
+    private String nominal;
 
-    String parentCode;
+    private String parentCode;
 
-    String isoNumCode;
+    private String isoNumCode;
 
-    String isoCharCode;
+    private String isoCharCode;
 }

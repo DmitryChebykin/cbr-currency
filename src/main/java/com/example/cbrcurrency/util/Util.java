@@ -8,8 +8,11 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 @Slf4j
-public class Util {
+public final class Util {
     public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+    private Util() {
+    }
 
     public static Calendar getCalendar(LocalDate localDate) {
         Date date = Date.valueOf(localDate);
