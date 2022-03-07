@@ -8,18 +8,17 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Setter
+
 @Getter
-@NoArgsConstructor
 @Builder
 public class CurrencyExchangeDto {
-    private BigDecimal amount;
+    private final BigDecimal amount;
 
-    private BigDecimal rate;
+    private final BigDecimal rate;
 
-    private Long sourceId;
+    private final Long sourceId;
 
-    private Long destinationId;
+    private final Long destinationId;
 
     @QueryProjection
     public CurrencyExchangeDto(BigDecimal rate, BigDecimal amount, Long sourceId, Long destinationId) {

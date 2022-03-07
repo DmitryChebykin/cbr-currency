@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Optional;
@@ -29,9 +30,11 @@ public class ExchangeService {
 
     private final CalendarDateEntityRepository calendarDateEntityRepository;
 
+    private final Clock clock;
+
     @Transactional
     public BigDecimal exchange(CurrencyEntity source, CurrencyEntity dest, BigDecimal amount) {
-        Calendar today = Util.getCalendar(LocalDate.now());
+        Calendar today = Util.getCalendar(LocalDate.now(clock));
 
         Optional<CalendarDateEntity> optionalCalendarDateEntity = calendarDateEntityRepository.findByDate(today);
 

@@ -9,20 +9,19 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
-@Setter
+
 @Getter
-@NoArgsConstructor
 @Builder
 public class ExchangeGraphQlDto {
-    private Calendar date;
+    private final Calendar date;
 
-    private BigDecimal amount;
+    private final BigDecimal amount;
 
-    private BigDecimal rate;
+    private final BigDecimal rate;
 
-    private String fromCharCode;
+    private final String fromCharCode;
 
-    private String toCharCode;
+    private final String toCharCode;
 
     @QueryProjection
     public ExchangeGraphQlDto(Calendar date, BigDecimal amount, BigDecimal rate, String fromCharCode, String toCharCode) {

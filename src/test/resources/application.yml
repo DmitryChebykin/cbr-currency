@@ -3,9 +3,10 @@ server:
 # GraphQL
 graphql:
   servlet:
-    mapping: /graphql
     enabled: true
     corsEnabled: true
+    mapping: /graphql
+
 
 spring:
   datasource:

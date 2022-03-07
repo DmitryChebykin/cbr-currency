@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
@@ -39,12 +40,14 @@ public class QueryDslService {
 
     private final JPAQuery<?> jpaQuery;
 
+    private final Clock clock;
+
     @Transactional
     public long insertExchangeStoreEntity(ExchangeStoreEntity exchangeStoreEntity) {
 
         RelationalPath<ExchangeStoreEntity> storeEntityRelationalPath = QueryDslUtils.asRelational(Q_EXCHANGE_STORE_ENTITY);
 
-        Calendar calendar = Util.getCalendar(LocalDate.now());
+        Calendar calendar = Util.getCalendar(LocalDate.now(clock));
         return queryFactory.insert(storeEntityRelationalPath)
                 .columns(Q_EXCHANGE_STORE_ENTITY.sourceId, Q_EXCHANGE_STORE_ENTITY.destinationId)
                 .columns(Q_EXCHANGE_STORE_ENTITY.rate, Q_EXCHANGE_STORE_ENTITY.amount)

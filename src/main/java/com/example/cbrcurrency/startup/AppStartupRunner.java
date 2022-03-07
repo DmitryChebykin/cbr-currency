@@ -7,6 +7,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -17,6 +18,8 @@ import java.util.stream.IntStream;
 public class AppStartupRunner implements ApplicationRunner {
 
     private final CurrencyInfoDbSaverService currencyInfoDbSaverService;
+
+    private final Clock clock;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -35,7 +38,7 @@ public class AppStartupRunner implements ApplicationRunner {
 
                 log.info("Start load currency rates before, total days : {}", days);
 
-                IntStream.range(1, days).forEach(e -> currencyInfoDbSaverService.saveRatesAtDay(LocalDate.now().minusDays(e)));
+                IntStream.range(1, days).forEach(e -> currencyInfoDbSaverService.saveRatesAtDay(LocalDate.now(clock).minusDays(e)));
             }
         }
     }

@@ -3,24 +3,22 @@ package com.example.cbrcurrency.dto;
 import lombok.*;
 
 @Getter
-@Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class CurrencyDto {
-    private Long id;
+    private final Long id;
 
-    private String valuteId;
+    private final String valuteId;
 
-    private String engName;
+    private final String engName;
 
-    private String name;
+    private final String name;
 
-    private String nominal;
+    private final String nominal;
 
-    private String parentCode;
+    private final String parentCode;
 
-    private String isoNumCode;
+    private final String isoNumCode;
 
-    private String isoCharCode;
+    private final String isoCharCode;
 }

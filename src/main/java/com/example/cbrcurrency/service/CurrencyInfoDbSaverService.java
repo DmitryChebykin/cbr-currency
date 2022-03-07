@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -53,6 +54,8 @@ public class CurrencyInfoDbSaverService {
     private final ValuteBeanToRateEntityMapper valuteBeanToRateEntityMapper;
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private final Clock clock;
 
     @CachePut(value = "saveValutaBean")
     @Transactional
@@ -97,7 +100,7 @@ public class CurrencyInfoDbSaverService {
                 "SELECT id FROM ROWS UNION ALL " +
                 "SELECT ID FROM currency WHERE valute_id = :day LIMIT 1";
 
-        Calendar calendarNow = getCalendar(LocalDate.now());
+        Calendar calendarNow = getCalendar(LocalDate.now(clock));
 
         Calendar historyCalendar = getCalendar(date);
 

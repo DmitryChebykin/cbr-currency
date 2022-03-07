@@ -15,6 +15,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.LocalDate;
 
 @Aspect
@@ -28,6 +29,8 @@ public class ExchangeServiceHandler {
 
     private final CurrencyEntityRepository currencyEntityRepository;
 
+    private final Clock clock;
+
     @Pointcut("@annotation(Journal)")
     public void journalPointcut() {
         // TODO document why this method is empty
@@ -35,7 +38,7 @@ public class ExchangeServiceHandler {
 
     @Before("journalPointcut()")
     public void before(JoinPoint jp) {
-        currencyInfoDbSaverService.saveRatesAtDay(LocalDate.now());
+        currencyInfoDbSaverService.saveRatesAtDay(LocalDate.now(clock));
     }
 
     @AfterReturning(pointcut = "journalPointcut()", returning = "result")

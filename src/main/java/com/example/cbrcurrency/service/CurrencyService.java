@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,7 @@ public class CurrencyService {
     @Transactional(readOnly = true)
     public List<CurrencyDto> getAllCurrencies() {
         List<CurrencyEntity> currencyEntities = currencyEntityRepository.findAll();
-        return currencyEntities.stream().map(CurrencyMapper.INSTANCE::toDto).collect(Collectors.toList());
+        return currencyEntities.stream().map(CurrencyMapper.INSTANCE::toDto).sorted(Comparator.comparing(CurrencyDto::getEngName)).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

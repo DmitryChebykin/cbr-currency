@@ -5,12 +5,10 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Getter
-@Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class PeriodStatisticDto {
-    private BigDecimal amount;
+    private final BigDecimal amount;
 
-    private BigDecimal averageRate;
+    private final BigDecimal averageRate;
 }
