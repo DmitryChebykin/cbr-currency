@@ -7,6 +7,6 @@ import java.util.Calendar;
 import java.util.Optional;
 
 @RepositoryRestResource
- public interface CalendarDateEntityRepository extends BaseJpaRepository<CalendarDateEntity, Long> {
+public interface CalendarDateEntityRepository extends BaseJpaRepository<CalendarDateEntity, Long> {
     Optional<CalendarDateEntity> findByDate(Calendar date);
 }

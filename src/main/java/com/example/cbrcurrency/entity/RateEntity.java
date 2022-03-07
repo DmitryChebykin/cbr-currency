@@ -21,6 +21,6 @@ public class RateEntity extends BaseEntity<Long> {
     @JoinColumn(name = "currency_id")
     private CurrencyEntity currencyEntity;
 
-    @Column(name = "rate", precision = 9, scale = 4)
+    @Column(name = "rate", precision = 20, scale = 4)
     private BigDecimal currencyRate;
 }

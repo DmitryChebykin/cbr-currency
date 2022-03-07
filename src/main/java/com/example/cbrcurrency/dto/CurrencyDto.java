@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CurrencyDto  {
+public class CurrencyDto {
     Long id;
 
     String valuteId;

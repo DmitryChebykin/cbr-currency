@@ -21,9 +21,9 @@ public class ExchangeStoreEntity extends BaseEntity<Long> {
     @JoinColumn(name = "destinationid")
     private CurrencyEntity destinationId;
 
-    @Column(name = "amount", precision = 9, scale = 4)
+    @Column(name = "amount", precision = 20, scale = 4)
     private BigDecimal amount;
 
-    @Column(name = "rate", precision = 9, scale = 4)
+    @Column(name = "rate", precision = 20, scale = 4)
     private BigDecimal rate;
 }

@@ -2,30 +2,39 @@ package com.example.cbrcurrency.aspect;
 
 import com.example.cbrcurrency.entity.ExchangeStoreEntity;
 import com.example.cbrcurrency.repository.CurrencyEntityRepository;
-import com.example.cbrcurrency.service.ExchangeStoreEntityService;
+import com.example.cbrcurrency.service.CurrencyInfoDbSaverService;
+import com.example.cbrcurrency.service.ExchangeStoreService;
 import com.example.cbrcurrency.service.exception.CurrencyNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Aspect
-@Component
+@Service
 @RequiredArgsConstructor
 @Slf4j
 public class ExchangeServiceHandler {
+    private final CurrencyInfoDbSaverService currencyInfoDbSaverService;
 
-    private final ExchangeStoreEntityService exchangeStoreEntityService;
+    private final ExchangeStoreService exchangeStoreService;
 
     private final CurrencyEntityRepository currencyEntityRepository;
 
     @Pointcut("@annotation(Journal)")
     public void journalPointcut() {
+    }
+
+    @Before("journalPointcut()")
+    public void before(JoinPoint jp) {
+        currencyInfoDbSaverService.saveRatesAtDay(LocalDate.now());
     }
 
     @AfterReturning(pointcut = "journalPointcut()", returning = "result")
@@ -42,6 +51,6 @@ public class ExchangeServiceHandler {
 
         log.info(String.format("Trying save exchangeStoreEntity : %s", exchangeStoreEntity.toString()));
 
-        exchangeStoreEntityService.save(exchangeStoreEntity);
+        exchangeStoreService.save(exchangeStoreEntity);
     }
 }

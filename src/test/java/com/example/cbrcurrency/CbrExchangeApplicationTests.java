@@ -1,8 +1,9 @@
 package com.example.cbrcurrency;
 
 import com.example.cbrcurrency.dto.CurrencyExchangeDto;
-import com.example.cbrcurrency.service.PeriodStatisticDto;
+import com.example.cbrcurrency.dto.PeriodStatisticDto;
 import com.example.cbrcurrency.service.QueryDslService;
+import com.graphql.spring.boot.test.GraphQLTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-
+@GraphQLTest
 @SpringBootTest
 class CbrExchangeApplicationTests {
 //    @Autowired
@@ -60,7 +61,7 @@ class CbrExchangeApplicationTests {
 //                .forEach(e -> queryDslRepository.insertExchangeStoreEntity(exchangeStoreEntity));
 //                        System.out.println(l);
 
-        List<CurrencyExchangeDto> currencyExchangeDto = queryDslService.getStatisticExchangeDtoList(14L, 15L, 7);
+        List<CurrencyExchangeDto> currencyExchangeDto = queryDslService.getExchangesOfCurrencyPairFromDaysAgo(14L, 15L, 7);
 
         List resultList = entityManager.createNativeQuery("select * from currency").getResultList();
 

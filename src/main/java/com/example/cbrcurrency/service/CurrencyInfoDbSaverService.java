@@ -12,6 +12,7 @@ import com.example.cbrcurrency.xml.currencyRegistry.ValutaBean;
 import com.example.cbrcurrency.xml.quotes.ValCursBean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -19,6 +20,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +55,7 @@ public class CurrencyInfoDbSaverService {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    @CachePut(value = "saveValutaBean")
     @Transactional
     public void saveValutaBean() {
         log.info("Trying connect to cbr to get currency reference");

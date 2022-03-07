@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CurrencyEntity extends BaseEntity<Long>  {
+public class CurrencyEntity extends BaseEntity<Long> {
     @Column(name = "valute_id", unique = true)
     String valuteId;
 

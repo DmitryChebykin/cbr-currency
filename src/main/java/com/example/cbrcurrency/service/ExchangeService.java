@@ -6,7 +6,6 @@ import com.example.cbrcurrency.entity.CurrencyEntity;
 import com.example.cbrcurrency.entity.RateEntity;
 import com.example.cbrcurrency.repository.CalendarDateEntityRepository;
 import com.example.cbrcurrency.repository.CurrencyEntityRepository;
-import com.example.cbrcurrency.repository.ExchangeStoreEntityRepository;
 import com.example.cbrcurrency.repository.RateEntityRepository;
 import com.example.cbrcurrency.service.exception.CalendarDateNotFoundException;
 import com.example.cbrcurrency.service.exception.CurrencyNotFoundException;
@@ -29,8 +28,6 @@ public class ExchangeService {
     private final RateEntityRepository rateEntityRepository;
 
     private final CalendarDateEntityRepository calendarDateEntityRepository;
-
-    private final ExchangeStoreEntityRepository exchangeStoreEntityRepository;
 
     @Transactional
     public BigDecimal exchange(CurrencyEntity source, CurrencyEntity dest, BigDecimal amount) {

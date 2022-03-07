@@ -1,6 +1,6 @@
 package com.example.cbrcurrency.service.exception;
 
-public class RateNotFoundException  extends RuntimeException{
+public class RateNotFoundException extends RuntimeException {
     public RateNotFoundException() {
     }
 

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ExchangeStoreEntityService {
+public class ExchangeStoreService {
     private final ExchangeStoreEntityRepository exchangeStoreEntityRepository;
 
     @Transactional
